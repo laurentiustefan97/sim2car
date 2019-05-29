@@ -15,7 +15,8 @@ public class TrafficLightView {
 	private Color trafficLightColor;
 	private MapPoint currentPoint;
 	private Integer mkLock = 1;
-	private MapMarkerDot lastMk = null;
+	private MapMarkerDot lastMkDot = null;
+	private MapMarkerTrafficLight lastMk = null;
 	
 	private long wayId;
 	private int direction;
@@ -49,28 +50,52 @@ public class TrafficLightView {
 			public void run() {
 				synchronized (mkLock) {
 					
-					if (currentPoint == null)
-						return;
-					if (lastMk == null) {
-						//lastMk = new MapMarkerTrafficLight(trafficLightColor, currentPoint.lat, currentPoint.lon);
-						lastMk = new MapMarkerDot(currentPoint.lat, currentPoint.lon);
-						lastMk.setColor(trafficLightColor);
-						lastMk.setBackColor(trafficLightColor);
-						map.addMapMarker(lastMk);
-						return;
+					if (Globals.showGUI) {
+						if (currentPoint == null)
+							return;
+						if (Globals.circleTrafficLight) {
+							if (lastMkDot == null) {
+								lastMkDot = new MapMarkerDot(currentPoint.lat, currentPoint.lon);
+								lastMkDot.setColor(trafficLightColor);
+								lastMkDot.setBackColor(trafficLightColor);
+								map.addMapMarker(lastMkDot);
+								return;
+							}
+						}
+						else {
+							if (lastMk == null) {
+								lastMk = new MapMarkerTrafficLight(trafficLightColor, currentPoint.lat, currentPoint.lon);
+								lastMk.setBackColor(trafficLightColor);
+								map.addMapMarker(lastMk);
+								return;
+							}
+						}
 					}
 
+					
 					changeColor();
 					// remove the traffic light
-					if (lastMk != null) {
-						map.removeMapMarker(lastMk);
+					if (Globals.showGUI) {
+						if (Globals.circleTrafficLight) {
+							if (lastMkDot != null) {
+								map.removeMapMarker(lastMkDot);
+							}
+							// add the traffic light again with the new color
+							lastMkDot = new MapMarkerDot(currentPoint.lat, currentPoint.lon);
+							lastMkDot.setColor(trafficLightColor);
+							lastMkDot.setBackColor(trafficLightColor);
+							map.addMapMarker(lastMkDot);
+						}
+						else {
+							if (lastMk != null) {
+								map.removeMapMarker(lastMk);
+							}
+							// add the traffic light again with the new color
+							lastMk = new MapMarkerTrafficLight(trafficLightColor, currentPoint.lat, currentPoint.lon);
+							lastMk.setBackColor(trafficLightColor);
+							map.addMapMarker(lastMk);
+						}
 					}
-					// add the traffic light again with the new color
-					//lastMk = new MapMarkerTrafficLight(trafficLightColor, currentPoint.lat, currentPoint.lon);
-					lastMk = new MapMarkerDot(currentPoint.lat, currentPoint.lon);
-					lastMk.setColor(trafficLightColor);
-					lastMk.setBackColor(trafficLightColor);
-					map.addMapMarker(lastMk);
 				}
 
 			}

@@ -159,33 +159,10 @@ public class MobilityEngine {
 	 * @return true	if the cell has been added successfully, false otherwise
 	 */
 	public boolean addTrafficLight(GeoTrafficLightMaster trafficLightMaster) {
-		Node node = trafficLightMaster.getNode();
-		Way way = streetsGraph.get(node.wayId);
-
-		/*long cellIndex = trafficLightPoint.cellIndex;
-		
-		//System.out.println("try to add " + way.id + " " + nodeIndex + "Segment " + nodeIndex + " Cell " + cellIndex);
-		if (nodeIndex == -1 || cellIndex == -1 || nodeIndex == way.nodes.size()) {
-			logger.warning("Could not attach street to traffic light " + trafficLight.getId());
-			System.out.println("Could not attach street to traffic light " + trafficLight.getId() + " " + way.nodes.size());
-			return false;
-		}
-		//System.out.println("try to add " + way.id + " " + nodeIndex);*/
 
 		for (Node nodeToSetTrafficLight : trafficLightMaster.getNodes()) {
 			nodeToSetTrafficLight.setTrafficLightControl(trafficLightMaster.getId());
 		}
-//		node.setTrafficLightControl(trafficLightMaster.getId());
-		
-//		if (way.neighs.containsKey(node.id)) {
-//			for (Long wayIdNeigh : way.neighs.get(node.id)) {
-//				Way wayNeigh = getWay(wayIdNeigh);
-//				//System.out.println(wayIdNeigh + " " + wayNeigh.getDirection());
-//				int nodeNeighIndex = wayNeigh.getNodeIndex(node.id);
-//				Node nodeNeigh = wayNeigh.getNodeByIndex(nodeNeighIndex);
-//				nodeNeigh.setTrafficLightControl(trafficLightMaster.getId());
-//			}
-//		}
 		return true;
 	}
 	

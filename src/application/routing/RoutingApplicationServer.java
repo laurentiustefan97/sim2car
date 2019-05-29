@@ -321,7 +321,7 @@ public class RoutingApplicationServer extends Application{
 
 		if (Utils.distance(serv.getCurrentPos().lat, serv.getCurrentPos().lon,
 				destEntity.getCurrentPos().lat, destEntity.getCurrentPos().lon) > RoutingApplicationParameters.distMax) {
-			System.out.println("Car " + destEntity.getId() + "has no server in range");
+			//System.out.println("Car " + destEntity.getId() + "has no server in range");
 			return;
 		}
 

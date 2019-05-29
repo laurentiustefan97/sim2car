@@ -30,6 +30,9 @@ public class Globals {
 
     @Parameter(names = {"--showGUI", "-gui"}, description = "Display the graphic interface with the application.", arity = 1)
     public static boolean showGUI = true;
+    
+    @Parameter(names = {"--showServers"}, description = "Display the graphic interface of the servers with the application.", arity = 1)
+    public static boolean showServers = false;
 	
 	@Parameter(names = {"--serversLogging", "-slog"}, description = "Enable logging for servers.", arity = 1)
     public static boolean serversLogging = true;
@@ -45,6 +48,9 @@ public class Globals {
     
 	@Parameter(names = {"--debug"}, description = "The length of a clock tick.")
 	public static int debug = 0;
+	
+	@Parameter(names = {"--circleTrafficLight"}, description = "Display a traffic light as a circle.", arity = 1)
+    public static boolean circleTrafficLight = false;
 	
 	@Parameter(names = {"--carsCount"}, description = "The number of cars simulated.")
     public static int carsCount = 150;

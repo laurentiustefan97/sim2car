@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -22,6 +24,10 @@ import utils.tracestool.Utils;
 
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+import org.openstreetmap.gui.jmapviewer.OsmFileCacheTileLoader;
+import org.openstreetmap.gui.jmapviewer.interfaces.TileCache;
+
+import controller.newengine.SimulationEngine;
 
 /**
  * Class to deal with visualising the simulation.
@@ -45,6 +51,11 @@ public class Viewer {
 	public Viewer(final MapConfig mapConfig) {
 		if (Globals.showGUI) {
 			mapJ = new JMapViewer();
+			try {
+				mapJ.setTileLoader(new OsmFileCacheTileLoader(mapJ, new File("D:\\temp")));
+			} catch (SecurityException | IOException e) {
+				e.printStackTrace();
+			}
 			mapJ.setDisplayPositionByLatLon(mapConfig.getMapCentre().getX(),
 					mapConfig.getMapCentre().getY(), 11);
 			serverView = new ServerView(mapConfig.getN(), mapConfig.getM(), new ArrayList<GeoServer>(), mapJ);
@@ -57,18 +68,18 @@ public class Viewer {
 	}
 
 	public void addCar(GeoCar car) {
-		//if (Globals.showGUI && car.getId() == 148) {
+		if (Globals.showGUI) {
 			CarView carView = new CarView(car.getId(), mapJ, car);
 			carView.setColor(new Color( (float) Math.random(),
 										(float) Math.random(),
 										(float) Math.random()) );
 			carViewList.add(carView);
-		//}
+		}
 	}
 	
 	public void addServers(ArrayList<GeoServer> servers) {
-		if (Globals.showGUI) {
-			//view.initLocationServer(servers);
+		if (Globals.showGUI && Globals.showServers) {
+			view.initLocationServer(servers);
 		}
 	}
 	
@@ -83,10 +94,6 @@ public class Viewer {
 		int nodeIndex;
 		int direction;
 		double distanceFromCenter, distanceBetweenNodes;
-		
-		if (trafficLightMaster.getId()== 893) {
-			System.out.println("here");
-		}
 		
 		/* save a copy of the intersection node */
 		centerNode = node;
@@ -147,7 +154,6 @@ public class Viewer {
 			newPoint.lon = (node.lon - prevNode.lon) * distanceFromCenter / distanceBetweenNodes + prevNode.lon;
 			
 			newPoint = MapPoint.getMapPoint(newPoint.lat, newPoint.lon, true, prevNode.wayId);
-			addMapMarker(newPoint.lat, newPoint.lon, Color.yellow);
 			
 			direction = - direction;
 			
@@ -156,19 +162,6 @@ public class Viewer {
 			trafficLightMaster.addTrafficLightView(trafficLightView);
 		}
 		
-	}
-	
-	/***
-	 * Adds a map marker to the map
-	 * @param lat
-	 * @param lon
-	 * @param color
-	 */
-	public void addMapMarker(double lat, double lon, Color color) {
-		MapMarkerDot lastMk = new MapMarkerDot(lat, lon);
-		lastMk.setBackColor(color);
-		lastMk.setColor(color);
-		mapJ.addMapMarker(lastMk);
 	}
 
 	/***
@@ -186,7 +179,6 @@ public class Viewer {
 		int nodeNeighIndex;
 		Color trafficLightColor = Color.red;
 		
-		if (Globals.showGUI) {
 			
 			currentWay = MobilityEngine.getInstance().getWay(currentTrafficLightMaster.getNode().wayId);
 			currentNode = currentTrafficLightMaster.getNode();
@@ -263,7 +255,7 @@ public class Viewer {
 			
 			currentTrafficLightMaster.setIntersectionType(currentTrafficLightMaster.getTrafficLights().size());
 			addTrafficLightMaster(currentTrafficLightMaster);
-		}
+		
 		return true;
 	}
 	
@@ -322,13 +314,14 @@ public class Viewer {
 	}
 	
 	public void updateTrafficLightsColors() {
-		if (Globals.showGUI) {
 			for (GeoTrafficLightMaster trafficLightMaster : trafficLightMasterList.values()) {
-				long simulationTime = view.getTimer().equals("") ? 0 : Long.parseLong(view.getTimer());
+				long simulationTime = SimulationEngine.getInstance().getSimulationTime();
 				if (trafficLightMaster.needsColorsUpdate(simulationTime))
 					trafficLightMaster.updateTrafficLightViews(simulationTime);
 			}
-			view.repaint();
-		}
+			if (Globals.showGUI) {
+				view.repaint();
+			}
+		
 	}
 }

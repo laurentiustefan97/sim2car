@@ -99,8 +99,6 @@ public final class EngineUtils {
 				if (count == Globals.carsCount)
 					break;
 
-				if (count == 183)
-					System.out.println("read ");
 				logger.info(" We opened " + count + ". " + line);
 				StringTokenizer st = new StringTokenizer(line, " ", false);
 				st.nextToken(); /* <cab */
@@ -111,8 +109,6 @@ public final class EngineUtils {
 				
 				GeoCar car = new GeoCar(count);
 				car.setRoutes(routes);
-				if (count == 183)
-					System.out.println("read +");
 
 				/* Create each network interface which is defined */
 				for( NetworkType type : Globals.activeNetInterfaces )
@@ -210,7 +206,6 @@ public final class EngineUtils {
 				MapPoint mp = new MapPoint(pix, lat, lon, false, 0);
 
 				GeoServer s = new GeoServer(mapConfig.getN(), mapConfig.getM(), count, mp);
-				//System.out.println(s.getId());
 				
 				addApplicationToServer(s);
 
@@ -319,7 +314,7 @@ public final class EngineUtils {
 			}
 		}
 		
-		System.out.println(servers.size());
+		System.out.println("servers " + servers.size());
 	}
 	
 	private static void addTrafficLightApps(GeoTrafficLightMaster master) {
@@ -427,7 +422,7 @@ public final class EngineUtils {
 					currentPoint.cellIndex = cell;
 					TrafficLightView view = new TrafficLightView(viewer.getMapJ(), currentPoint, wayId, direction);
 					view.setColor(color);
-					viewer.addMapMarker(currentPoint.lat, currentPoint.lon, view.getColor());
+					view.updateTrafficLightView();
 					master.addTrafficLightView(view);
 				}
 			}
@@ -441,7 +436,7 @@ public final class EngineUtils {
 				ex.printStackTrace();
 			}
 		}
-		System.out.println(trafficLights.size());
+		System.out.println("traffic lights " + trafficLights.size());
 		return trafficLights;
 	}
 	
