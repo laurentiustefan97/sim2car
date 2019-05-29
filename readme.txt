@@ -12,4 +12,11 @@ E.g.
 	--useTrafficLights
 	
 The program will automatically download and extract car traces at first run. After this, copy trafficLights_sanfrancisco.txt to <project_folder>\processeddata\maps\XmlSanFrancisco
+Traces folder: <project folder>\processeddata\traces\sanfrancisco\InterpolatedSanFrancisco
+Traffic lights folder: <project_folder>\processeddata\maps\XmlSanFrancisco
 See config file: configurations\simulator\sanfrancisco.properties
+
+Obs: You can run SimCar using traces from three cities: San Francisco, Beijing, Rome:
+-prop src\configurations\simulator\sanfrancisco.properties
+-prop src\configurations\simulator\rome.properties
+-prop src\configurations\simulator\beijing.properties
