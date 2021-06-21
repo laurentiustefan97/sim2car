@@ -144,8 +144,8 @@ public class EngineSimulation implements EngineInterface {
 		map = new GeoMap(mapConfig.getN(), mapConfig.getM(), sync);
 
 		mapJ = new JMapViewer();
-		mapJ.setDisplayPositionByLatLon(mapConfig.getMapCentre().getX(),
-				mapConfig.getMapCentre().getY(), 11);
+		mapJ.setDisplayPosition((int)mapConfig.getMapCentre().getX(),
+				(int)mapConfig.getMapCentre().getY(), 11);
 
 		carsView = new ArrayList<CarView>();
 

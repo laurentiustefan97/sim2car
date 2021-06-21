@@ -120,7 +120,7 @@ public class CongestionHeatmap extends JFrame {
 		mapConfig = MapConfiguration.getInstance("D:/Master/Master2/Cercetare/sim2car-merge_trafficLightControl_smartRouting/sim2car-merge_trafficLightControl_smartRouting/src/configurations/simulator/sanfrancisco.properties");
 		map = new JMapViewer();
 		//map_lat_min 39.4140061 map_lon_m;;;in 115.6860661 map_lat_max 40.426 map_lon_max 117.1189678
-		map.setDisplayPositionByLatLon(mapConfig.getMapCentre().getY(), mapConfig.getMapCentre().getX(), 9);
+		map.setDisplayPosition((int)mapConfig.getMapCentre().getY(), (int)mapConfig.getMapCentre().getX(), 9);
 		map.setZoomContolsVisible(true);
 //		MapMarkerCircle alphaLayer = new MapMarkerCircle(
 //				new Coordinate(mapConfig.getMapCentre().getX(), mapConfig.getMapCentre().getY()), 1);
