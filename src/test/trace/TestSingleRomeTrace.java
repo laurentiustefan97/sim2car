@@ -42,7 +42,7 @@ public class TestSingleRomeTrace extends JFrame {
 		
 		map = new JMapViewer();
 		//41.9072957658043 12.4894718722508
-		map.setDisplayPositionByLatLon(41.9072957658043, 12.4894718722508, 11);
+		map.setDisplayPosition((int)41.9072957658043, (int)12.4894718722508, 11);
 		map.setZoomContolsVisible(true);
 //		MapMarkerCircle alphaLayer = new MapMarkerCircle(
 //				new Coordinate(mapConfig.getMapCentre().getX(), mapConfig.getMapCentre().getY()), 1);

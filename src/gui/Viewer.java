@@ -45,8 +45,8 @@ public class Viewer {
 	public Viewer(final MapConfig mapConfig) {
 		if (Globals.showGUI) {
 			mapJ = new JMapViewer();
-			mapJ.setDisplayPositionByLatLon(mapConfig.getMapCentre().getX(),
-					mapConfig.getMapCentre().getY(), 11);
+			mapJ.setDisplayPosition((int)mapConfig.getMapCentre().getX(),
+					(int)mapConfig.getMapCentre().getY(), 11);
 			serverView = new ServerView(mapConfig.getN(), mapConfig.getM(), new ArrayList<GeoServer>(), mapJ);
 			view = new View(mapConfig.getN(), mapConfig.getM(), mapJ, serverView, carViewList, trafficLightMasterList);
 		}

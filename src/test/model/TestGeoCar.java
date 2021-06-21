@@ -37,8 +37,8 @@ public class TestGeoCar {
 		Globals.zoomLevel += mapConfig.getQuot();
 
 		JMapViewer mapJ = new JMapViewer();
-		mapJ.setDisplayPositionByLatLon(mapConfig.getMapCentre().getX(),
-				mapConfig.getMapCentre().getY(), 11);
+		mapJ.setDisplayPosition((int)mapConfig.getMapCentre().getX(),
+				(int)mapConfig.getMapCentre().getY(), 11);
 		
 		final GeoCar car = new GeoCar(0);
 		
