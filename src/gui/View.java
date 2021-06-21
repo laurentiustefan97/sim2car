@@ -27,7 +27,7 @@ import model.OSMgraph.Way;
 import model.mobility.MobilityEngine;
 import utils.tracestool.Utils;
 
-import org.openstreetmap.gui.jmapviewer.Coordinate;
+import org.openstreetmap.gui.jmapviewer.interfaces.ICoordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 
 import controller.newengine.EngineUtils;
@@ -64,7 +64,7 @@ public class View extends JFrame {
 			public void mousePressed(MouseEvent e) {
 				System.out.println(e.getX() + " " + e.getY());
 				System.out.println(map.getPosition(e.getX(), e.getY()));
-				Coordinate coord = map.getPosition(e.getX(), e.getY());
+				ICoordinate coord = map.getPosition(e.getX(), e.getY());
 				
 				Node node = null;
 				double dist = Double.MAX_VALUE;

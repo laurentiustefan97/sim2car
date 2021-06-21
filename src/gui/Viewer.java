@@ -23,20 +23,11 @@ import utils.TraceParsingTool;
 import utils.tracestool.Utils;
 
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
-import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
-import org.openstreetmap.gui.jmapviewer.OsmFileCacheTileLoader;
-import org.openstreetmap.gui.jmapviewer.interfaces.TileCache;
 
 import controller.newengine.SimulationEngine;
 
 /**
- * Class to deal with visualising the simulation.
- * TODO: Move all GUI stuff from the EngineSimulation in here.
- *
- */
-public class Viewer {
-	private View view;
-	
+ * Class to deal with visualising the simulation.  * TODO: Move all GUI stuff from the EngineSimulation in here.  * */ public class Viewer { private View view;
 	private JMapViewer mapJ;
 	/**
 	 * The server view for all the geo servers
@@ -51,13 +42,8 @@ public class Viewer {
 	public Viewer(final MapConfig mapConfig) {
 		if (Globals.showGUI) {
 			mapJ = new JMapViewer();
-			try {
-				mapJ.setTileLoader(new OsmFileCacheTileLoader(mapJ, new File("D:\\temp")));
-			} catch (SecurityException | IOException e) {
-				e.printStackTrace();
-			}
-			mapJ.setDisplayPositionByLatLon(mapConfig.getMapCentre().getX(),
-					mapConfig.getMapCentre().getY(), 11);
+			mapJ.setDisplayPosition((int)mapConfig.getMapCentre().getX(),
+					(int)mapConfig.getMapCentre().getY(), 11);
 			serverView = new ServerView(mapConfig.getN(), mapConfig.getM(), new ArrayList<GeoServer>(), mapJ);
 			view = new View(mapConfig.getN(), mapConfig.getM(), mapJ, serverView, carViewList, trafficLightMasterList);
 		}

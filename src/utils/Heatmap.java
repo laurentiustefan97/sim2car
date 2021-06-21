@@ -36,7 +36,7 @@ public class Heatmap extends JFrame {
 		mapConfig = MapConfiguration.getInstance("e:/Cursuri/master/cercetare/Sim2Car/trunk/src/beijing.properties");
 		map = new JMapViewer();
 		//map_lat_min 39.4140061 map_lon_min 115.6860661 map_lat_max 40.426 map_lon_max 117.1189678
-		map.setDisplayPositionByLatLon(mapConfig.getMapCentre().getX(), mapConfig.getMapCentre().getY(), 11);
+		map.setDisplayPosition((int)mapConfig.getMapCentre().getX(), (int)mapConfig.getMapCentre().getY(), 11);
 		map.setZoomContolsVisible(true);
 //		MapMarkerCircle alphaLayer = new MapMarkerCircle(
 //				new Coordinate(mapConfig.getMapCentre().getX(), mapConfig.getMapCentre().getY()), 1);
