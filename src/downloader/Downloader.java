@@ -33,10 +33,21 @@ public class Downloader {
 		
 		// Extract city
 		String propF [] = path[path.length -1].split(".p");
-		System.out.println("City: " + propF[0]);
-		System.out.println();
 		
 		city = propF[0];
+
+		if (city.contains("rome")) {
+			city = "rome";
+		} else if (city.contains("beijing")) {
+			city = "beijing";
+		} else if (city.contains("sanfrancisco")) {
+			city = "sanfrancisco";
+		} else {
+			System.out.println("Unsupported city!");
+		}
+
+		System.out.println("City: " + city);
+		System.out.println();
 	}
 	
 	public void downloadTraces(String propFile) {
