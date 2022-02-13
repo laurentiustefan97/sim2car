@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
@@ -107,7 +108,12 @@ public final class EngineUtils {
 				String path = SimulationEngine.getInstance().getMapConfig().getTracesPath() + "joints_" + srcId + ".txt";
 				List<GeoCarRoute> routes = Utils.readCarTraces(path);
 				
+				/* Generate emergency vehicles too */
 				GeoCar car = new GeoCar(count);
+				Random r = new Random();
+				if (r.nextDouble() < 0.1)
+					car.emergencyVehicle = true;
+
 				car.setRoutes(routes);
 
 				/* Create each network interface which is defined */

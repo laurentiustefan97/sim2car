@@ -230,8 +230,12 @@ public class GeoTrafficLightMaster extends Entity{
 		
 		synchronized (updateLock) {
 			if (waitingQueue.containsKey(key)) {
+				Long firstCarWaitingTime = waitingQueue.get(key).getFirst();
+				if (data.isEmergencyVehicle()) {
+					firstCarWaitingTime += Globals.maxWaitingTime;
+				}
 				Pair<Long, Integer> value = new Pair<Long, Integer>
-					(waitingQueue.get(key).getFirst(), waitingQueue.get(key).getSecond() + 1);
+					(firstCarWaitingTime, waitingQueue.get(key).getSecond() + 1);
 
 				waitingQueue.put(key, value);
 			}

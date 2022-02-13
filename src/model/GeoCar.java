@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Logger;
+import java.util.Random;
 
 import controller.network.NetworkInterface;
 import controller.network.NetworkType;
@@ -38,6 +39,8 @@ public class GeoCar extends Entity {
 	 * checked against traffic rule and will replace currentPos.
 	 */
 	private MapPoint nextPos = null;
+
+	public boolean emergencyVehicle;
 
 	/** The speed of the car. */
 	public double speed = 0.0;
@@ -336,6 +339,7 @@ public class GeoCar extends Entity {
 		data.setDirection(direction);
 		data.setMapPoint(mapPoint);
 		data.setTimeStop(SimulationEngine.getInstance().getSimulationTime());
+		data.setEmergencyVehicle(this.emergencyVehicle);
 
 		// System.out.println("Car " + this.getId() + " sends data to traffic light " +
 		// trafficLightMaster.getId());
