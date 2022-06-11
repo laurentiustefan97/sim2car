@@ -109,9 +109,15 @@ public class Globals {
 	@Parameter(names = {"--speedIncreaseEmergencyVehicles"}, description = "Set the percentage the emergency vehicles' speed is increased compared to regular cars. (maximum 1.0 - 100% - double speed)")
 	public static double speedIncreaseEmergencyVehicles = 0.0;
 
+	@Parameter(names = {"--firefighterStallRounds"}, description = "The number of rounds the firefighter stalls when treating a fire incident.")
+	public static int firefighterStallRounds = 10;
+
+	@Parameter(names = {"--firefighterFirePeriod"}, description = "The number of rounds until a firefighter needs to stop (a fire occurs).")
+	public static int firefighterFirePeriod = 100;
+
 	@Parameter(names = {"--carIdFuelStatistics"}, description = "The car id used to retrieve fuel consumption statistics.")
     public static long carIdFuelStatistics = 10;
-	
+
 	/**
 	 * Proxy usage from commandline
 	 * --useHttpProxy true  --httpProxyHost HOST  --httpProxyPort X  

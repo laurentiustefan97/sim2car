@@ -57,7 +57,7 @@ public class GeoCar extends Entity {
 	private Personality driver;
 
 	/** The new list of routes of the car */
-	private List<GeoCarRoute> routes;
+	protected List<GeoCarRoute> routes;
 
 	/** Reference to mobility */
 	private MobilityEngine mobility;
@@ -90,7 +90,7 @@ public class GeoCar extends Entity {
 	StringBuffer routesTime = new StringBuffer();
 	// StringBuffer tracesTime = new StringBuffer();
 
-	private Color color;
+	protected Color color;
 
 	public GeoCar(int id) {
 		this(id, new RegularPersonality());

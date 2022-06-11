@@ -35,6 +35,7 @@ import application.routing.RoutingApplicationParameters;
 import application.routing.RoutingApplicationServer;
 import model.GeoCar;
 import model.GeoCarRoute;
+import model.GeoFirefighter;
 import model.GeoServer;
 import model.GeoTrafficLightMaster;
 import model.MapPoint;
@@ -89,6 +90,7 @@ public final class EngineUtils {
 			fstream = new FileInputStream(carListFilename);
 			BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 			String line;
+			Random r = new Random();
 
 			/* Read data about traces */
 			while ((line = br.readLine()) != null) {
@@ -109,11 +111,15 @@ public final class EngineUtils {
 				List<GeoCarRoute> routes = Utils.readCarTraces(path);
 				
 				/* Generate emergency vehicles too */
-				GeoCar car = new GeoCar(count);
+				GeoCar car;
+
 				if (Globals.useEmergencyVehicles) {
-					Random r = new Random();
 					if (r.nextDouble() < 0.1)
-						car.emergencyVehicle = true;
+						car = new GeoFirefighter(count);
+					else
+						car = new GeoCar(count);
+				} else {
+					car = new GeoCar(count);
 				}
 
 				car.setRoutes(routes);
