@@ -103,6 +103,9 @@ public class Globals {
 	@Parameter(names = {"--useDynamicTrafficLights"}, description = "If true, use traffic lights")
 	public static boolean useDynamicTrafficLights = false;
 	
+	@Parameter(names = {"--useEmergencyVehicles"}, description = "If true, use emergency vehicles")
+	public static boolean useEmergencyVehicles = false;
+
 	@Parameter(names = {"--carIdFuelStatistics"}, description = "The car id used to retrieve fuel consumption statistics.")
     public static long carIdFuelStatistics = 10;
 	

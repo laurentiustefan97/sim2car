@@ -110,9 +110,11 @@ public final class EngineUtils {
 				
 				/* Generate emergency vehicles too */
 				GeoCar car = new GeoCar(count);
-				Random r = new Random();
-				if (r.nextDouble() < 0.1)
-					car.emergencyVehicle = true;
+				if (Globals.useEmergencyVehicles) {
+					Random r = new Random();
+					if (r.nextDouble() < 0.1)
+						car.emergencyVehicle = true;
+				}
 
 				car.setRoutes(routes);
 
