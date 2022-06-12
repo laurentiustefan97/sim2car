@@ -90,6 +90,8 @@ public class GeoCar extends Entity {
 	StringBuffer routesTime = new StringBuffer();
 	// StringBuffer tracesTime = new StringBuffer();
 
+	private Color color;
+
 	public GeoCar(int id) {
 		this(id, new RegularPersonality());
 	}
@@ -826,5 +828,36 @@ public class GeoCar extends Entity {
 
 	public void setStopppedAtTrafficLight(boolean stoppedAtTrafficLight) {
 		this.stoppedAtTrafficLight = stoppedAtTrafficLight;
+	}
+
+	/**
+	 * Generate initial car color and return it.
+	 */
+	public Color generateColor() {
+		Color carColor;
+		if (emergencyVehicle) {
+			carColor = Color.RED;
+		} else {
+			do {
+				carColor = new Color((float) Math.random(), (float) Math.random(), (float) Math.random());
+			} while (carColor == Color.RED);
+		}
+
+		this.color = carColor;
+
+		return carColor;
+	}
+
+	public Color changeColor() {
+		/* The logic for emergency vehicles when they need to change color */
+		if (emergencyVehicle) {
+			if (color == Color.RED) {
+				color = Color.BLUE;
+			} else if (color == Color.BLUE) {
+				color = Color.RED;
+			}
+		}
+
+		return color;
 	}
 }

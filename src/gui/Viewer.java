@@ -56,18 +56,8 @@ import controller.newengine.SimulationEngine;
 	public void addCar(GeoCar car) {
 		if (Globals.showGUI) {
 			CarView carView = new CarView(car.getId(), mapJ, car);
-
-			Color carColor;
-			if (car.emergencyVehicle) {
-				carColor = Color.RED;
-			} else {
-				do {
-					carColor = new Color((float) Math.random(), (float) Math.random(), (float) Math.random());
-				} while (carColor == Color.RED);
-			}
-
+			Color carColor = car.generateColor();
 			carView.setColor(carColor);
-
 			carViewList.add(carView);
 		}
 	}

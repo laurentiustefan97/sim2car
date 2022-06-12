@@ -52,6 +52,9 @@ public class CarView {
 
 	public void updateCarView() {
 		synchronized (updateLock) {
+			/* For emergency vehicles, also change alternatively the color */
+			carColor = car.changeColor();
+
 			if ((car.isBeginNewRoute() || car.getActive() == 0) && CarView.trackerLine)
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
