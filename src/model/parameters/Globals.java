@@ -106,6 +106,9 @@ public class Globals {
 	@Parameter(names = {"--useEmergencyVehicles"}, description = "If true, use emergency vehicles")
 	public static boolean useEmergencyVehicles = false;
 
+	@Parameter(names = {"--speedIncreaseEmergencyVehicles"}, description = "Set the percentage the emergency vehicles' speed is increased compared to regular cars. (maximum 1.0 - 100% - double speed)")
+	public static double speedIncreaseEmergencyVehicles = 0.0;
+
 	@Parameter(names = {"--carIdFuelStatistics"}, description = "The car id used to retrieve fuel consumption statistics.")
     public static long carIdFuelStatistics = 10;
 	
