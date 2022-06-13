@@ -33,6 +33,7 @@ import application.ApplicationType;
 import application.ApplicationUtils;
 import application.routing.RoutingApplicationParameters;
 import application.routing.RoutingApplicationServer;
+import model.GeoAmbulance;
 import model.GeoCar;
 import model.GeoCarRoute;
 import model.GeoFirefighter;
@@ -114,8 +115,11 @@ public final class EngineUtils {
 				GeoCar car;
 
 				if (Globals.useEmergencyVehicles) {
-					if (r.nextDouble() < 0.1)
+					double currRandom = r.nextDouble();
+					if (currRandom < 0.1)
 						car = new GeoFirefighter(count);
+					else if (currRandom < 0.2)
+						car = new GeoAmbulance(count);
 					else
 						car = new GeoCar(count);
 				} else {
